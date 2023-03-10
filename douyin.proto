@@ -1,0 +1,339 @@
+syntax = "proto3";
+
+package douyin;
+
+message HeadersList {
+    string key = 1;
+    string value = 2;
+}
+
+message PushFrame {
+    uint64 seqId = 1;
+    uint64 logId = 2;
+    uint64 service = 3;
+    uint64 method = 4;
+    repeated HeadersList headersList = 5;
+    string payloadEncoding = 6;
+    string payloadType = 7;
+    bytes payload = 8;
+}
+
+
+message Message {
+    string method = 1;
+    bytes payload = 2;
+    int64 msgId = 3;
+    int32 msgType = 4;
+    int64 offset = 5;
+    bool needWrdsStore = 6;
+    int64 wrdsVersion = 7;
+    string wrdsSubKey = 8;
+}
+
+message Response {
+    repeated Message messagesList = 1;
+    string cursor = 2;
+    uint64 fetchInterval = 3;
+    uint64 now = 4;
+    string internalExt = 5;
+    uint32 fetchType = 6;
+    map<string, string> routeParams = 7;
+    uint64 heartbeatDuration = 8;
+    bool needAck = 9;
+    string pushServer = 10;
+    string liveCursor = 11;
+    bool historyNoMore = 12;
+}
+
+
+message ChatMessage {
+    User user = 2;
+    string content = 3;
+    bool visibleToSender = 4;
+}
+
+
+message User {
+    uint64 id = 1;
+    uint64 shortId = 2;
+    string nickName = 3;
+    uint32 gender = 4;
+    string Signature = 5;
+    uint32 Level = 6;
+    uint64 Birthday = 7;
+    string Telephone = 8;
+    string city = 14;
+}
+
+message UpdatedProductInfo {
+    uint64 price = 1;
+    string title = 2;
+    string cover = 3;
+    uint64 status = 4;
+    string popUpicon = 5;
+}
+
+message UpdatedCouponInfo{
+    string tag = 1;
+    string couponUrl = 2;
+    string couponApplet = 3;
+    bool isValid = 4;
+    string couponMetaId = 5;
+}
+
+message UpdatedCampaignInfo {
+    bool isValid = 1;
+    string label = 2;
+    string price = 3;
+    string pic = 4;
+    string startTime = 5;
+    string endTime = 6;
+    string timeStartLabel = 7;
+    string timeEndLabel = 8;
+    string userLimit = 9;
+    string isPreheat = 10;
+    string campaignId = 11;
+}
+
+message SkuInfo {
+    string skuId = 1;
+    uint64 stockNum = 2;
+    uint64 price = 3;
+    uint64 couponPrice = 4;
+}
+
+message UpdatedSkuInfo{
+    SkuInfo skusMap = 1;
+    uint64 minPrice = 2;
+    uint64 maxPrice = 3;
+    uint64 unuseMinPrice = 4;
+    uint64 couponPrice = 5;
+}
+
+message UpdatedCommentaryVideoInfo{
+    uint64 action = 1;
+}
+
+message UpdatedGroupInfo{
+    repeated string avatarListList = 1;
+    int64 joined = 2;
+    int64 groupSize = 3;
+    int64 persent = 4;
+}
+
+message TraceTimeMetric{
+    uint64 opTimestamp = 1;
+    uint64 producerDuration = 2;
+    uint64 consumerDuration = 3;
+    uint64 msgSendTimestamp = 4;
+}
+
+message AuctionSuccess{
+    string title = 1;
+    uint64 productId = 2;
+    string productName = 3;
+    string productPic = 4;
+    uint64 price = 5;
+    uint64 charge = 6;
+    uint64 freight = 7;
+    uint64 total = 8;
+    string buttonLabel = 9;
+    string jumpUrl = 10;
+    string freightCollect = 11;
+    uint64 leftPaymentTime = 12;
+    uint32 bizId = 13;
+    string depositInfo = 14;
+}
+
+message IncrPriceList{
+    uint64 price = 1;
+    uint64 range = 2;
+};
+
+message AuctionInfo{
+    uint64 price = 1;
+    string priceLabel = 2;
+    uint32 status = 3;
+    string jumpUrl = 4;
+    //CurrentUserInfo currentUserInfo = 5;
+    IncrPriceList incrPriceListsList = 6;
+    string buttonLabel = 7;
+    uint64 productId = 8;
+    uint64 endTime = 9;
+    uint32 bizId = 10;
+}
+
+message HotAtmosphere{
+    string img = 1;
+    string saleNum = 2;
+    uint64 type = 3;
+    string num = 4;
+    string bgColor = 5;
+    string borderColor = 6;
+    uint64 leftMargin = 7;
+    uint64 uiType = 8;
+    repeated string bgColorsList = 9;
+    repeated string bordergColorsList = 10;
+    string topImg = 11;
+}
+
+message BenefitLabel{
+    string lefttext = 1;
+    string righttext = 2;
+    uint32 textstyle = 3;
+    uint32 colorstyle = 4;
+    uint32 divline = 5;
+}
+
+message LotteryInfoList{
+    string activityId = 1;
+    string taskType = 2;
+    uint32 openTime = 3;
+    uint32 userActivityStatus = 4;
+    string winRecordId = 5;
+    string resultLabel = 6;
+    string buttonLabel = 7;
+    repeated string textList = 8;
+    string jumpUrl = 9;
+    uint64 lotteryType = 10;
+    string elasticTitle = 11;
+    BenefitLabel benefitLabel = 12;
+}
+
+
+message WinLotteryAlert{
+    string title = 1;
+    string content = 2;
+    string buttonLabel = 3;
+}
+
+message LotteryProductShortInfo{
+    uint64 productId = 1;
+    string img = 2;
+}
+
+message LotteryInfo{
+    uint64 lotteryType = 1;
+    string enterIcon = 2;
+    string icon = 3;
+    string activityId = 4;
+    uint64 openTime = 5;
+    LotteryProductShortInfo productInfo = 6;
+}
+
+message WinLotteryInfo{
+    string title = 1;
+    string name = 2;
+    string img = 3;
+    string buttonLabel = 4;
+    string winRecordId = 5;
+    string activityId = 6;
+    bool isAddressed = 7;
+    WinLotteryAlert alert = 8;
+    bool isWin = 9;
+    string jumpUrl = 10;
+    uint64 productId = 11;
+    repeated uint64 activityPriceList = 12;
+    uint64 buyTime = 13;
+    uint64 lotteryType = 14;
+    string productIdStr = 15;
+}
+
+message CartVertical{
+    bool allowShowCart = 1;
+}
+
+message CartHorizontal{
+    bool allowShowCart = 1;
+}
+
+message GlobalCustomIcons{
+    string staticIconUrl = 1;
+    string animatedIconUrl = 2;
+    string animatedCommonIconUrl = 3;
+}
+
+message UpdatedCartInfo{
+    CartVertical vertical = 1;
+    CartHorizontal horizontal = 2;
+    GlobalCustomIcons globalCustomIcons = 3;
+}
+
+message RedpackActivityInfo{
+    uint64 redpackType = 1;
+    string redpackActivityId = 2;
+    string redpackActivityName = 3;
+    uint64 startApplyTime = 4;
+    uint64 endApplyTime = 5;
+    uint64 preheatTime = 6;
+    uint64 totalAmount = 7;
+    string authorAvatarUrl = 8;
+    string authorName = 9;
+    string pendantBackgroundUrl = 10;
+    string redpackFrontBackgroundUrl = 11;
+    string redpackLabel = 12;
+    string redpackAfterBackgroundUrl = 13;
+    string redpackAfterBeltUrl = 14;
+    uint64 scatterTime = 15;
+    uint64 serverTime = 16;
+    uint64 maxAmount = 17;
+    uint64 showType = 18;
+    string shorttouchPendantBackgroundUrl = 19;
+    string shorttouchPendantIconUrl = 20;
+    string shorttouchLottieUrl = 21;
+}
+
+message RoomTagOfflineInfo{
+    uint64 tagType = 1;
+    string userToast = 2;
+}
+
+message UpIcon{
+    string name = 1;
+    string upIcon = 2;
+    string upDesc = 3;
+    string publicScreenNotice = 4;
+}
+
+message FilterSwitchChangeData{
+    bool enable = 1;
+    UpIcon upIcon = 2;
+}
+
+message LiveShoppingMessage{
+    uint32 common = 1;
+    uint32 msgType = 2;
+    uint64 promotionId = 3;
+    repeated uint64 targetUidList = 4;
+    uint32 bubbleType = 5;
+    uint64 screenshotTimestamp = 6;
+    repeated uint64 secTargetUidList = 7;
+    string ecomNotice = 8;
+    repeated uint64 updatedProductIdsList = 9;
+    uint32 updateType = 10;
+    UpdatedProductInfo updatedProductInfo = 11;
+    bool soldOut = 12;
+    UpdatedCouponInfo updatedCouponInfo = 13;
+    UpdatedCampaignInfo updatedCampaignInfo = 14;
+    uint64 updateTimestamp = 15;
+    string buttonLabel = 16;
+    uint64 promotionsNum = 17;
+    UpdatedSkuInfo updateSkuInfo = 18;
+    UpdatedCommentaryVideoInfo updatedCommentaryVideoInfo = 19;
+    UpdatedGroupInfo updatedGroupInfo = 20;
+    string commerceAuthorityChangeToast = 21;
+    TraceTimeMetric traceTimeMetric = 22;
+    AuctionSuccess auctionSuccess = 23;
+    AuctionInfo auctionInfo = 24;
+    RedpackActivityInfo redpackActivityInfo = 25;
+    UpdatedCartInfo updatedCartInfo = 26;
+    LotteryInfo lotteryInfo = 27;
+    WinLotteryInfo winLotteryinfo = 28;
+    LotteryInfoList lotteryInfoList = 29;
+    HotAtmosphere hotAtmosphere = 30;
+    string updateToast = 31;
+    bool canSold = 32;
+    uint64 logicalClock = 33;
+    RoomTagOfflineInfo roomTagOfflineInfo = 34;
+    FilterSwitchChangeData filterSwitchChangeData = 35;
+}
